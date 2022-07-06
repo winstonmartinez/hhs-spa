@@ -1,19 +1,18 @@
 <template>
   <div class="container">
     <Header title="Patient Information Form"/>
-    <Button text="Next" color="green"></Button>
+    <Form />
   </div>
 </template>
 
 <script>
 import Header from './components/Header'
-import Button from './components/Button'
+import Form from './components/Form'
 export default {
   name: 'App',
   components: {
     Header,
-    Button
-
+    Form
   }
 }
 </script>
