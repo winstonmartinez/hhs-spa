@@ -58,7 +58,10 @@
         },
         methods: {
             handleSubmit () {
-                console.log(this.firstName, this.lastName, this.dob, this.hcNum, this.gender)
+                // console.log(this.firstName, this.lastName, this.dob, this.hcNum,
+                //  this.gender)
+                 this.$emit("formSubmitted", [`${this.firstName} ${this.lastName}`, 
+                 this.dob, this.hcNum, this.gender])
             }
         }
     }

@@ -5,7 +5,7 @@
     </label>
     <div v-else > 
         {{ label }}
-        <input :type="inputType" v-model="inputValue" id="male" value="male" checked>
+        <input :type="inputType" v-model="inputValue" id="male" value="male" >
         <label for="male">Male</label>
         <input :type="inputType" v-model="inputValue" id="female" value="female">
         <label for="female">Female</label>
