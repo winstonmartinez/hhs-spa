@@ -1,16 +1,31 @@
 <template>
-    <label v-if="!isRadio">
+    <label class="label" v-if="!isRadio">
         {{ label }}
         <input :type="inputType" v-model="inputValue">
+        <span class="error" v-if="isValid">{{ fnMsg }}</span>
     </label>
-    <div v-else > 
+    <div class="label" v-else>
         {{ label }}
-        <input :type="inputType" v-model="inputValue" id="male" value="male" >
-        <label for="male">Male</label>
-        <input :type="inputType" v-model="inputValue" id="female" value="female">
-        <label for="female">Female</label>
-        <input :type="inputType" v-model="inputValue" id="other" value="other">
-        <label for="other">Other</label>
+
+        <div >
+            <span class="radio-inputs">
+                <input  :type="inputType" v-model="inputValue" id="male" value="male">
+                <label for="male">Male</label>
+            </span>
+
+            <span class="radio-inputs">
+                <input class="radio-inputs" :type="inputType" v-model="inputValue" id="female" value="female">
+                <label for="female">Female</label>
+            </span>
+
+            <span class="radio-inputs">
+                <input class="radio-inputs" :type="inputType" v-model="inputValue" id="other" value="other">
+                <label for="other">Other</label>
+            </span>
+
+            
+        </div>
+
     </div>
 </template>
 
@@ -23,7 +38,7 @@ export default {
         inputType: String,
         isRadio: Boolean,
         fnMsg: String,
-        isFirstName: Boolean
+        isValid: Boolean
     },
     computed: {
 
@@ -39,4 +54,14 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.label {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+}
+
+.radio-inputs {
+    margin: 2px;
+}
+</style>

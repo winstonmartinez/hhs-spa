@@ -25,7 +25,7 @@
             <Input v-model="gender" :label="genderLabel" :inputType="inputTypes[2]" :isRadio="true" />
             <span class="error" v-if="v$.gender.$error">{{ v$.gender.$errors[0].$message }}</span>
         </div>
-        <Button text="Next" color="green"></Button>
+        <Button text="Submit" color="green"></Button>
     </form>
 </template>
 
@@ -57,15 +57,16 @@ export default {
             genderLabel: 'Gender: ',
             inputTypes: ['text', 'date', 'radio'],
             isRadio: false,
+            isFnValid: Boolean
 
         }
     },
     validations() {
         return {
-            firstName: { required, alpha },
-            lastName: { required, alpha },
+            firstName: { required: helpers.withMessage('First name is required', required), alpha },
+            lastName: { required: helpers.withMessage('Last name is required', required), alpha },
             dob: {
-                required,
+                required: helpers.withMessage('Date of birth is required', required),
                 minValue: helpers.withMessage(
                     ({
                         $pending,
@@ -88,10 +89,12 @@ export default {
                 ),
             },
             hcNum: {
-                required, numeric, minLength: minLength(10),
+                required: helpers.withMessage('Health card number is required', 
+                required), numeric, 
+                minLength: minLength(10),
                 maxLength: maxLength(10)
             },
-            gender: { required },
+            gender: { required: helpers.withMessage('Gender is required', required) }
         }
     },
     methods: {
@@ -104,7 +107,7 @@ export default {
                 this.dob, this.hcNum, this.gender])
             } else {
                 // console.log(this.v$.firstName.$errors[0].$message)
-                // this.isFirstName = true
+                
                 // this.fnMsg = this.v$.firstName.$errors[0].$message
 
             }
@@ -114,10 +117,7 @@ export default {
 </script>
 
 <style>
-    .input {
-        display: block;
-        
-    }
+    
 
     .error {
         color: red;

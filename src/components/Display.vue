@@ -1,19 +1,19 @@
 <template>
     <div>
         <div>
-            <label>Patient Name:</label>
+            <h3>Patient Name:</h3>
             {{name}}
         </div>
         <div>
-            <label>Date of Birth:</label>
+            <h3>Date of Birth:</h3>
             {{dob}}
         </div>
         <div>
-            <label>Health Card Number:</label>
+            <h3>Health Card Number:</h3>
             {{hcNum}}
         </div>
         <div>
-            <label>Gender:</label>
+            <h3>Gender:</h3>
             {{gender}}
         </div>
 
