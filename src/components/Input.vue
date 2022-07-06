@@ -9,17 +9,27 @@
 
         <div >
             <span class="radio-inputs">
-                <input  :type="inputType" v-model="inputValue" id="male" value="male">
+                <input  :type="inputType"
+                    v-model="inputValue" 
+                    id="male" value="male">
+
                 <label for="male">Male</label>
             </span>
 
             <span class="radio-inputs">
-                <input class="radio-inputs" :type="inputType" v-model="inputValue" id="female" value="female">
+                <input class="radio-inputs" 
+                    :type="inputType" 
+                    v-model="inputValue" 
+                    id="female" value="female">
                 <label for="female">Female</label>
             </span>
 
             <span class="radio-inputs">
-                <input class="radio-inputs" :type="inputType" v-model="inputValue" id="other" value="other">
+                <input class="radio-inputs" 
+                    :type="inputType" 
+                    v-model="inputValue" 
+                    id="other" 
+                    value="other">
                 <label for="other">Other</label>
             </span>
 

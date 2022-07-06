@@ -12,7 +12,7 @@
         },
         methods: {
             onClick () {
-                console.log('clicked')
+                
             }
         }
     }

@@ -1,30 +1,46 @@
 <template>
-    <form @submit.prevent="handleSubmit">
+    <form @submit.perevnt="handleSubmit">
 
         <div class="input">
-            <Input v-model="firstName" :label="fnLabel" :inputType="inputTypes[0]" :isRadio="false" />
-            <span class="error" v-if="v$.firstName.$error">{{ v$.firstName.$errors[0].$message }}</span>
+            <Input v-model="firstName" :label="fnLabel" 
+                :inputType="inputTypes[0]" :isRadio="false" />
+            <span class="error" v-if="v$.firstName.$error">
+                {{ v$.firstName.$errors[0].$message }}
+            </span>
         </div>
 
         <div class="input">
-            <Input v-model="lastName" :label="lnLabel" :inputType="inputTypes[0]" :isRadio="false" />
-            <span class="error" v-if="v$.lastName.$error">{{ v$.lastName.$errors[0].$message }}</span>
+            <Input v-model="lastName" :label="lnLabel" 
+                :inputType="inputTypes[0]" :isRadio="false" />
+            <span class="error" v-if="v$.lastName.$error">
+                {{ v$.lastName.$errors[0].$message }}
+            </span>
         </div>
 
         <div class="input">
-            <Input v-model="dob" :label="dobLabel" :inputType="inputTypes[1]" :isRadio="false" />
-            <span class="error" v-if="v$.dob.$error">{{ v$.dob.$errors[0].$message }}</span>
+            <Input v-model="dob" :label="dobLabel" 
+                :inputType="inputTypes[1]" :isRadio="false" />
+            <span class="error" v-if="v$.dob.$error">
+                {{ v$.dob.$errors[0].$message }}
+            </span>
         </div>
 
         <div class="input">
-            <Input v-model="hcNum" :label="hcNumLabel" :inputType="inputTypes[0]" :isRadio="false" />
-            <span class="error" v-if="v$.hcNum.$error">{{ v$.hcNum.$errors[0].$message }}</span>
+            <Input v-model="hcNum" :label="hcNumLabel" 
+                :inputType="inputTypes[0]" :isRadio="false" />
+            <span class="error" v-if="v$.hcNum.$error">
+                {{ v$.hcNum.$errors[0].$message }}
+            </span>
         </div>
 
         <div class="input">
-            <Input v-model="gender" :label="genderLabel" :inputType="inputTypes[2]" :isRadio="true" />
-            <span class="error" v-if="v$.gender.$error">{{ v$.gender.$errors[0].$message }}</span>
+            <Input v-model="gender" :label="genderLabel" 
+                :inputType="inputTypes[2]" :isRadio="true" />
+            <span class="error" v-if="v$.gender.$error">
+                {{ v$.gender.$errors[0].$message }}
+            </span>
         </div>
+
         <Button text="Submit" color="green"></Button>
     </form>
 </template>
@@ -35,6 +51,29 @@ import Input from './Input'
 import useValidate from '@vuelidate/core'
 import { required, numeric, alpha, minLength, maxLength, helpers }
     from '@vuelidate/validators'
+
+const hcCheck = function(value) {
+// accept only digits, dashes or spaces
+    if (/[^0-9-\s]+/.test(value)) return false;
+
+// The Luhn Algorithm
+    var nCheck = 0, nDigit = 0, bEven = false;
+    value = value.replace(/\D/g, "");
+
+    for (var n = value.length - 1; n >= 0; n--) {
+        var cDigit = value.charAt(n),
+            nDigit = parseInt(cDigit, 10);
+
+        if (bEven) {
+            if ((nDigit *= 2) > 9) nDigit -= 9;
+        }
+
+        nCheck += nDigit;
+        bEven = !bEven;
+    }
+
+    return (nCheck % 10) == 0;
+}
 
 export default {
     name: 'Form',
@@ -57,7 +96,8 @@ export default {
             genderLabel: 'Gender: ',
             inputTypes: ['text', 'date', 'radio'],
             isRadio: false,
-            isFnValid: Boolean
+            isFnValid: Boolean,
+
 
         }
     },
@@ -89,10 +129,11 @@ export default {
                 ),
             },
             hcNum: {
-                required: helpers.withMessage('Health card number is required', 
-                required), numeric, 
+                required: helpers.withMessage('Health card number is required',
+                    required), numeric,
                 minLength: minLength(10),
-                maxLength: maxLength(10)
+                maxLength: maxLength(10),
+                hcCheck
             },
             gender: { required: helpers.withMessage('Gender is required', required) }
         }
@@ -107,7 +148,7 @@ export default {
                 this.dob, this.hcNum, this.gender])
             } else {
                 // console.log(this.v$.firstName.$errors[0].$message)
-                
+
                 // this.fnMsg = this.v$.firstName.$errors[0].$message
 
             }
@@ -117,8 +158,6 @@ export default {
 </script>
 
 <style>
-    
-
     .error {
         color: red;
         font-size: smaller;
