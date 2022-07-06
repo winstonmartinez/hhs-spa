@@ -21,7 +21,9 @@ export default {
         label: String,
         modelValue: String,
         inputType: String,
-        isRadio: Boolean
+        isRadio: Boolean,
+        fnMsg: String,
+        isFirstName: Boolean
     },
     computed: {
 
