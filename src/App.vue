@@ -2,6 +2,9 @@
   <div class="container">
     <Header title="Patient Information Form"/>
     <Form />
+    <div @formSubmitted="displayInfo">
+
+    </div>
   </div>
 </template>
 
@@ -13,6 +16,21 @@ export default {
   components: {
     Header,
     Form
+  },
+  data() {
+    return {
+      patientInfo: {
+        name: '',
+        dob: '',
+        hcNum: '',
+        gender: '',
+      }
+    }
+  },
+  methods: {
+    displayInfo(event) {
+      console.log(event)
+    }
   }
 }
 </script>
